@@ -22,6 +22,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    public const ADMIN = '/admin';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -46,6 +47,13 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
+        $this->mapUserRoutes();
+
+        $this->mapHotelRoutes();
+
+        $this->mapPermissionRoutes();
+
+        $this->mapRoleRoutes();
         //
     }
 
@@ -60,7 +68,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(base_path('routes/web.php'));
+            ->group(base_path('routes/web/web.php'));
     }
 
     /**
@@ -75,6 +83,38 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
+            ->group(base_path('routes/api/api.php'));
+    }
+
+    protected function mapUserRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/user/users.php'));
+    }
+
+    protected function mapHotelRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/hotel/hotels.php'));
+    }
+
+    protected function mapRoleRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/roles.php'));
+    }
+
+    protected function mapPermissionRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/permissions.php'));
     }
 }
