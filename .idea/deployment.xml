@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="HMS" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="HMS" overwriteAll="false" deleteMissingItems="true" createEmptyFolders="true" uploadOnCheckin="892b8c62-49f3-49ce-bc0a-8c8e0fa39c51" autoUploadExternalChanges="true">
     <serverData>
       <paths name="HMS">
         <serverdata>
@@ -10,5 +10,7 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="HMS" />
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
