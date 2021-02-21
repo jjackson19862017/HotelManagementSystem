@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="892b8c62-49f3-49ce-bc0a-8c8e0fa39c51" name="HMS" url="https://hmsv2.webhop.me">
-        <fileTransfer rootFolder="/var/www/html" accessType="SFTP" host="46.101.73.171" port="22" sshConfigId="1f0396c0-5146-4d39-93a7-4aa8a122dcad" sshConfig="root@46.101.73.171:22 key" keyPair="true">
+        <fileTransfer rootFolder="/var/www/html" accessType="SFTP" host="46.101.73.171" port="22" sshConfigId="1f0396c0-5146-4d39-93a7-4aa8a122dcad" sshConfig="HMS Root" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
