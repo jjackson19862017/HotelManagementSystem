@@ -13,15 +13,12 @@
                     <div class="card-body">
                         @if(!$permissions->isEmpty())
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-sm table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Delete</th>
                                     <th>Action</th>
-
                                 </tr>
                                 </thead>
 
@@ -36,10 +33,6 @@
                                             alert alert-danger
                                             @endif">
                                             {{$permission->name}}</td>
-                                        <td>{{$permission->slug}}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger">Delete</button>
-                                        </td>
                                         <td>@if (!$role->permissions->contains($permission))
                                                 <form action="{{route('role.permission.attach', $permission->id)}}" method="post">
                                                     @method('PUT')
@@ -59,6 +52,14 @@
                                                     <button type="submit" class="btn btn-danger">Detach</button>
                                                 </form>
                                             @endif</td>
+                                        <td> <form action="{{route('role.permission.detach', $permission->id)}}" method="post">
+                                                @method('PUT')
+                                                @csrf
+                                                <div class="form-group">
+                                                    <input type="hidden" name="permission" id="permission" value="{{$role->id}}">
+                                                </div>
+                                                <button type="submit" class="btn btn-danger">Detach</button>
+                                            </form></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
