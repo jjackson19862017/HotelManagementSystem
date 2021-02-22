@@ -16,50 +16,31 @@
                             <table class="table table-sm table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
+                                    <th class="w-90">Name</th>
+                                    <th>Options</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach ($permissions as $permission)
                                     <tr>
-                                        <td>{{$permission->id}}</td>
-                                        <td class="
-                                            @if ($role->permissions->contains($permission))
-                                            alert alert-success
-                                                @else
-                                            alert alert-danger
-                                            @endif">
+                                        <td >
                                             {{$permission->name}}</td>
-                                        <td>@if (!$role->permissions->contains($permission))
-                                                <form action="{{route('role.permission.attach', $permission->id)}}" method="post">
+                                        <td class=>@if (!$role->permissions->contains($permission))
+                                                <form action="{{route('role.permission.attach', $role)}}" method="post">
                                                     @method('PUT')
                                                     @csrf
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="permission" id="permission" value="{{$role->id}}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Attach</button>
+                                                        <input type="hidden" name="permission" id="permission" value="{{$permission->id}}">
+                                                    <button type="submit" class="btn btn-primary btn-block">Attach</button>
                                                 </form>
                                             @else
-                                                <form action="{{route('role.permission.detach', $permission->id)}}" method="post">
+                                                <form action="{{route('role.permission.detach', $role)}}" method="post">
                                                     @method('PUT')
                                                     @csrf
-                                                    <div class="form-group">
-                                                        <input type="hidden" name="permission" id="permission" value="{{$role->id}}">
-                                                    </div>
-                                                    <button type="submit" class="btn btn-danger">Detach</button>
+                                                        <input type="hidden" name="permission" id="permission" value="{{$permission->id}}">
+                                                    <button type="submit" class="btn btn-danger btn-block">Detach</button>
                                                 </form>
                                             @endif</td>
-                                        <td> <form action="{{route('role.permission.detach', $permission->id)}}" method="post">
-                                                @method('PUT')
-                                                @csrf
-                                                <div class="form-group">
-                                                    <input type="hidden" name="permission" id="permission" value="{{$role->id}}">
-                                                </div>
-                                                <button type="submit" class="btn btn-danger">Detach</button>
-                                            </form></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
