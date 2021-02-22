@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -41,6 +42,11 @@ class HotelController extends Controller
             'website'=> request('website'),
             'email'=> request('email'),
             'numberOfRooms'=> request('numberOfRooms'),
+        ]);
+
+        Role::create([
+            'name'=> Str::ucfirst(request('name')),
+            'slug'=> Str::of(Str::lower(request('name')))->slug('-'),
         ]);
 
         $request->session()->flash('message', $request->name . ' was created...');
