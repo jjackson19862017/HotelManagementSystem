@@ -15,8 +15,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Slug</th>
+                                    <th class="w-90">Name</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -25,8 +24,8 @@
                                 <tbody>
                                 @foreach ($permissions as $permission)
                                     <tr>
-                                        <td>{{$permission->name}}</td>
-                                        <td>{{$permission->slug}}</th>
+                                        <td><a class="btn btn-link"  href="{{route('permission.edit', $permission->id)}}"
+                                               role="button"><i class="fas fa-edit"></i> {{$permission->name}}</a></td>
                                         <td>
                                             <form action="{{route('permission.destroy', $permission->id)}}" method="post">
                                                 @csrf

@@ -16,10 +16,8 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Telephone</th>
+                                    <th>Contact</th>
                                     <th>Address</th>
-                                    <th>Website</th>
-                                    <th>E-Mail</th>
                                     <th>Rooms</th>
                                     <th>Action</th>
 
@@ -29,13 +27,15 @@
                             <tbody>
                                 @foreach ($hotels as $hotel)
                                     <tr>
-                                        <td>{{$hotel->name}}</td>
-                                        <td>{{$hotel->telephone}}</td>
+                                        <td><a class="btn btn-link"
+                                               href="{{route('hotel.edit', $hotel->id)}}"
+                                               role="button"><i class="fas fa-edit"></i> {{$hotel->name}}</a></td>
+                                        <td>{{$hotel->telephone}}<br>
+                                            <a href="mailto:{{$hotel->email}}">{{$hotel->email}}</a><br>
+                                            <a href="http://{{$hotel->website}}" target="_blank">{{$hotel->website}}</a>
+                                        </td>
                                         <td>{{$hotel->address}}<br>{{$hotel->town}}<br>{{$hotel->county}}<br>{{$hotel->postcode}}</td>
-                                        <td>{{$hotel->website}}</td>
-                                        <td><a href="mailto:{{$hotel->email}}">{{$hotel->email}}</td>
                                         <td>{{$hotel->numberOfRooms}}</td>
-
                                         <td>
                                             <form action="{{route('hotel.destroy', $hotel->id)}}" method="post">
                                                 @csrf

@@ -36,10 +36,9 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
 
-        return view('admin.permissions.edit', [
-            'permission'=>$permission,
-            'permissions'=>Permission::all()
-        ]);
+        $data = [];
+        $data['permission'] = $permission;
+        return view('admin.permission.edit', $data);
     }
 
     public function update(Request $request, Permission $permission)
@@ -55,6 +54,7 @@ class PermissionController extends Controller
             $permission->save();
         } else {
             $request->session()->flash('message', 'Nothing to Update...');
+            $request->session()->flash('text-class', 'text-warning');
 
         }
         return redirect()->route('permission.index');

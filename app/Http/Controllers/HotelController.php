@@ -64,4 +64,35 @@ class HotelController extends Controller
         return back();
     }
 
+    public function edit(Hotel $hotel)
+    {
+
+        $data = [];
+        $data['hotel'] = $hotel;
+        return view('admin.hotel.edit', $data);
+    }
+
+    public function update(Request $request, Hotel $hotel)
+    {
+        //$role->id = request('id');
+        // Takes the name input and creates the slug input all in lowercase and changes the spaces for -'s
+        $inputs = request()->validate([
+            'name'=> ['required','string'],
+            'telephone'=> ['required','string'],
+            'address'=> ['required','string'],
+            'town'=> ['required','string'],
+            'county'=> ['required','string'],
+            'postcode'=> ['required','string'],
+            'website'=> ['required','string'],
+            'email'=> ['required','string'],
+            'numberOfRooms'=> ['required','integer'],
+        ]);
+
+        $hotel->update($inputs);
+        $request->session()->flash('message', 'Hotel: ' . $request->name . ' was Updated...');
+        $request->session()->flash('text-class', 'text-success');
+
+        return redirect()->route('hotels.index');
+    }
+
 }

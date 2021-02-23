@@ -18,3 +18,5 @@ Auth::routes();
 Route::get('/hotels/', [App\Http\Controllers\HotelController::class, 'index'])->name('hotel.index');
 Route::post('/hotels', [App\Http\Controllers\HotelController::class, 'store'])->name('hotel.store');
 Route::delete('/hotels/{hotel}', [App\Http\Controllers\HotelController::class, 'destroy'])->name('hotel.destroy'); //info This allows hotels to delete hotels in the admin area
+Route::get('/hotels/{hotel}/edit', [App\Http\Controllers\HotelController::class, 'edit'])->name('hotel.edit');
+Route::put('/hotels/{hotel}/update', [App\Http\Controllers\HotelController::class, 'update'])->name('hotel.update');

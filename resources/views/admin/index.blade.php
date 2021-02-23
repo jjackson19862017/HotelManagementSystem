@@ -557,5 +557,10 @@
 </div>
 @endsection
 
+    @section('js')
+        <script src="{{asset('vendor/chart.js/chart.min.js')}}"></script>
+        <script src="{{asset('assets/demo/chart-area-demo.js')}}"></script>
+        <script src="{{asset('assets/demo/chart-bar-demo.js')}}"></script>
+    @endsection
 
 </x-admin-master>

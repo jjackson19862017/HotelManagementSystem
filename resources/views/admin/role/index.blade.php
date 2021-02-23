@@ -15,8 +15,7 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead class="thead-dark">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Slug</th>
+                                    <th class="w-90">Name</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -25,8 +24,7 @@
                                 <tbody>
                                 @foreach ($roles as $role)
                                     <tr>
-                                        <td><a href="{{route('role.edit', $role->id)}}">{{$role->name}}</a></td>
-                                        <td>{{$role->slug}}</th>
+                                        <td><a class="btn btn-link" href="{{route('role.edit', $role->id)}}"><i class="fas fa-edit"></i> {{$role->name}}</></td>
                                         <td>
                                             <form action="{{route('role.destroy', $role->id)}}" method="post">
                                                 @csrf
