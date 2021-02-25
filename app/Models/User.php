@@ -47,6 +47,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function setPasswordAttribute($password){
+        if ( $password !== null & $password !== "" )
+        {
+            //dd("Hey");
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
+
+    public function getDeletedByAttribute($id)
+    {
+        // Grabs the name of the User who deleted the User.
+        return User::withTrashed()->whereId($id)->value('name');
+    }
+
+    public function getCreatedByAttribute($id)
+    {
+        // Grabs the name of the User who deleted the User.
+        return User::withTrashed()->whereId($id)->value('name');
+    }
 
 
     public function getLastLoginAtAttribute($date)

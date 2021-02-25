@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->timestamp('last_login_at')->nullable();
             $table->softDeletes();
+            $table->integer('deleted_by')->nullable();
+            $table->integer('created_by')->nullable();
         });
     }
 

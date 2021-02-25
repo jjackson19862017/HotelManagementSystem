@@ -24,21 +24,19 @@
                             <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td>{{$user->username}}</td>
+                                        <td><a href="{{route('user.profile.show',$user->id)}}"><i class="fas fa-edit"></i> {{$user->username}}</a></td>
                                         <td>{{$user->name}} - {{$user->last_login_at}}</td>
                                         <td><a href="mailto:{{$user->email}}">{{$user->email}}</td>
-                                        <td>
-                                            <form action="{{route('user.destroy', $user->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fas fa-user-times"></i> Delete
-                                                </button>
-                                            </form>
-                                    </td>
-
-
-
+                                        @method('DELETE')
+                                            <td>
+                                                <form action="{{route('user.destroy', $user->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fas fa-user-times"></i> Delete
+                                                    </button>
+                                                </form>
+                                            </td>
                                     </tr>
 
                                 @endforeach
@@ -117,6 +115,22 @@
                         @error('password_confirmation')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="role" class="col-form-label col-sm-3">Name</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="role" id="role">
+                            @foreach ($user->roles as $user_role)
+                                @if ($user_role->slug == $user_role->slug)
+                                    <option value="{{$user_role->id}}">{{$user_role->name}}</option>
+                                @endif
+                            @endforeach
+                            @foreach ($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <hr>

@@ -41,6 +41,8 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->register(Illuminate\Database\Eloquent\LegacyFactoryServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
