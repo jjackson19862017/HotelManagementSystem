@@ -19,10 +19,11 @@ use App\Models\User;
 
 Auth::routes();
 // Returns the Frontend (at present my CV)
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Returns the Backend
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
+Route::get('/audit', [App\Http\Controllers\AdminController::class, 'auditTime'])->name('audit.index');
 
 //Setup the User Roles and set the first user as admin
 Route::get('/setup', function(){
