@@ -24,4 +24,16 @@ class Hotel extends Model
         $myPostcode = $this->address . ',';
         return $myAddress . $myTown . $myCounty . $myPostcode;
     }
+
+    public function getDeletedByAttribute($id)
+    {
+        // Grabs the name of the User who deleted the User.
+        return User::withTrashed()->whereId($id)->value('name');
+    }
+
+    public function getCreatedByAttribute($id)
+    {
+        // Grabs the name of the User who deleted the User.
+        return User::withTrashed()->whereId($id)->value('name');
+    }
 }

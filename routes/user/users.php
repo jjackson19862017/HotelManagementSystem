@@ -29,7 +29,7 @@ Route::put('/users/{user}/update/password', [App\Http\Controllers\UserController
 Route::get('/users/trashed', [App\Http\Controllers\UserController::class, 'trashedIndex'])->name('trashed.user.index');
 
 Route::get('/users/restore/{user}', [App\Http\Controllers\UserController::class, 'restoreUser'])->name('user.restore'); //info This allows users to restore users in the admin area
-Route::get('/users/trashed/{user}', [App\Http\Controllers\UserController::class, 'eraseUser'])->name('user.erase'); //info This allows users to restore users in the admin area
+Route::get('/users/trashed/{user}', [App\Http\Controllers\UserController::class, 'eraseUser'])->name('user.erase'); //info This allows users to erase users in the admin area
 
 Route::get('/users/{user}/profile', [App\Http\Controllers\UserController::class, 'show'])->name('user.profile.show');
 

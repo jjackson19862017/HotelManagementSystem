@@ -190,13 +190,13 @@ class UserController extends Controller
 
     public function passwordUpdate(Request $request, User $user): \Illuminate\Http\RedirectResponse
     {
-
         if (!(Hash::check($request->get('currentpassword'), $user->password))) {
             // This is what happens if current password is incorrect.
             $request->session()->flash('message', 'Current Password is Incorrect');
             $request->session()->flash('text-class', 'text-warning');
             return back();
         }
+
         if(strcmp($request->get('currentpassword'),$request->get('newpassword'))==0){
             $request->session()->flash('message', 'Current Password cannot be the same as the New Password');
             $request->session()->flash('text-class', 'text-warning');

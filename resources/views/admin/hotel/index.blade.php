@@ -19,7 +19,6 @@
                                     <th>Contact</th>
                                     <th>Address</th>
                                     <th>Rooms</th>
-                                    <th>Action</th>
 
                                 </tr>
                             </thead>
@@ -34,17 +33,8 @@
                                             <a href="mailto:{{$hotel->email}}">{{$hotel->email}}</a><br>
                                             <a href="http://{{$hotel->website}}" target="_blank">{{$hotel->website}}</a>
                                         </td>
-                                        <td>{{$hotel->address}}<br>{{$hotel->town}}<br>{{$hotel->county}}<br>{{$hotel->postcode}}</td>
+                                        <td>{{$hotel->address}},<br>{{$hotel->town}},<br>{{$hotel->county}},<br>{{$hotel->postcode}}</td>
                                         <td>{{$hotel->numberOfRooms}}</td>
-                                        <td>
-                                            <form action="{{route('hotel.destroy', $hotel->id)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fas fa-user-times"></i> Delete
-                                                </button>
-                                            </form>
-                                    </td>
 
 
 

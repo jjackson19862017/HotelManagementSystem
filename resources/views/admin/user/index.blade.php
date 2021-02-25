@@ -1,6 +1,6 @@
 <x-admin-master>
     @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid mt-1">
         <div class="row">
             <div class="card mb-4 w-100">
                 <div class="card-header">

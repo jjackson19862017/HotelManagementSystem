@@ -1,6 +1,6 @@
 <x-admin-master>
     @section('content')
-        <div class="container-fluid">
+        <div class="container-fluid  mt-1">
             <br>
             <div class="row">
                 <div class="col-sm-12 col-md-6">

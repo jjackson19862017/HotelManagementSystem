@@ -27,6 +27,8 @@ class CreateHotelsTable extends Migration
             $table->integer('numberOfRooms');
             $table->timestamps();
             $table->softDeletes();
+            $table->integer('deleted_by')->nullable();
+            $table->integer('created_by')->nullable();
         });
     }
 

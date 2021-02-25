@@ -5,6 +5,7 @@
         @if(!$deletedUsers == 0)<a class="dropdown-item" href="{{route('trashed.user.index')}}"><i class="fas fa-trash"></i> Deleted Users</a>@endif
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{route('hotel.index')}}"><i class="fas fa-hotel"></i> Hotel</a>
+        @if(!$deletedHotels == 0)<a class="dropdown-item" href="{{route('trashed.hotel.index')}}"><i class="fas fa-trash"></i> Deleted Hotels</a>@endif
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{route('role.index')}}"><i class="fas fa-user-tag"></i> Role</a>
         <a class="dropdown-item" href="{{route('permission.index')}}"><i class="fas fa-tasks"></i> Permission</a>

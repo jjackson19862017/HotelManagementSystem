@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class HotelController extends Controller
@@ -14,6 +15,13 @@ class HotelController extends Controller
         $data = [];
         $data['hotels'] = Hotel::all(); // Returns all the data from the Hotels Table
         return view('admin.hotel.index', $data);
+    }
+
+    public function trashedIndex()
+    {
+        $data = [];
+        $data['hotels'] = Hotel::onlyTrashed()->get(); // Returns all the information back from the Users Table
+        return view('admin.hotel.trashed', $data);
     }
 
     public function store(Request $request)
@@ -42,6 +50,7 @@ class HotelController extends Controller
             'website'=> request('website'),
             'email'=> request('email'),
             'numberOfRooms'=> request('numberOfRooms'),
+            'created_by'=> Auth::user()->id,
         ]);
 
         Role::create([
@@ -49,20 +58,12 @@ class HotelController extends Controller
             'slug'=> Str::of(Str::lower(request('name')))->slug('-'),
         ]);
 
-        $request->session()->flash('message', $request->name . ' was created...');
+        $request->session()->flash('message', 'Hotel Created');
         $request->session()->flash('text-class', 'text-success');
 
         return back();
     }
 
-    public function destroy(Request $request, Hotel $hotel): \Illuminate\Http\RedirectResponse
-    {
-        // Delete User
-        $hotel->delete();
-        $request->session()->flash('message', $hotel->name . ' was Deleted...');
-        $request->session()->flash('text-class', 'text-danger');
-        return back();
-    }
 
     public function edit(Hotel $hotel)
     {
@@ -89,10 +90,49 @@ class HotelController extends Controller
         ]);
 
         $hotel->update($inputs);
-        $request->session()->flash('message', 'Hotel: ' . $request->name . ' was Updated...');
+        $request->session()->flash('message', 'Updated: ' . $request->name);
         $request->session()->flash('text-class', 'text-success');
 
-        return redirect()->route('hotels.index');
+        return redirect()->route('hotel.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Hotel  $hotel
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, Hotel $hotel)
+    {
+        // Delete Hotel
+        $hotel->deleted_by = Auth::user()->id;
+        $hotel->save();
+        $hotel->delete();
+
+        $request->session()->flash('message', 'Deleted: ' . $hotel->name);
+        $request->session()->flash('text-class', 'text-danger');
+        return redirect()->route('hotel.index');
+
+    }
+
+    public function restoreHotel(Request $request, $hotel)
+    {
+        // Restore User
+        $hotel = Hotel::withTrashed()->find($hotel);
+        $hotel->restore();
+
+        $request->session()->flash('message', 'Restored: ' . $hotel->name);
+        $request->session()->flash('text-class', 'text-success');
+        return redirect()->route('trashed.hotel.index');
+    }
+
+    public function eraseHotel(Request $request, $hotel)
+    {
+        $hotel = Hotel::withTrashed()->find($hotel);
+        $hotel->forceDelete();
+        $request->session()->flash('message', 'ERASED: ' . $hotel->name);
+        $request->session()->flash('text-class', 'text-warning');
+        return redirect()->route('trashed.hotel.index');
     }
 
 }

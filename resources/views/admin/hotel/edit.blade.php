@@ -7,6 +7,12 @@
                     <div class="card mb-4 w-100">
                         <div class="card-header">
                             <h3><i class="fas fa-edit"></i> {{$hotel->name}}</h3>
+
+
+
+
+
+
                         </div>
                         <div class="card-body">
                             <form action="{{route('hotel.update', $hotel->id)}}" method="post" class="form-horizontal">
@@ -113,7 +119,15 @@
                                     </div>
                                 </div>
                                 <hr>
+
                                 <button type="submit" class="btn btn-primary float-right">Edit {{$hotel->name}}
+                                </button>
+                            </form>
+                            <form class="float-left" action="{{route('hotel.destroy', $hotel->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete {{$hotel->name}}
                                 </button>
                             </form>
                         </div>
